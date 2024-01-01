@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=1050, user-scalable=no">
+  <script type="text/javascript" src="extras/jquery.min.1.7.js"></script>
+  <script type="text/javascript" src="extras/modernizr.2.5.3.min.js"></script>
+</head>
+<body>
+  <div class="flipbook-viewport">
+    <div class="container">
+      <div class="flipbook"></div>
+    </div>
+  </div>
+  <video class="video" autoplay loop id="bgvid"></video>
+  <script type="text/javascript" src='js/main.js'></script>
+  <script type="text/javascript">
+    function loadApp() {
+      // Create the flipbook
+      const flipbook = $('.flipbook');
+
+      // Loop to generate div elements for each page
+      const numberOfPages = 76; // Define the number of pages
+      for (let i = 1; i <= numberOfPages; i++) {
+        const imageURL = `imgs/imgs/core3web${i}.png`;
+        const div = $('<div></div>').css('background-image', `url(${imageURL})`);
+        flipbook.append(div);
+      }
+
+      flipbook.turn({
+        width: 730,
+        height: 680,
+        elevation: 50,
+        gradients: true,
+        autoCenter: true,
+      });
+    }
+
+    yepnope({
+      test: Modernizr.csstransforms,
+      yep: ['lib/turn.js', 'js/main.js'],
+      nope: ['lib/turn.html4.min.js'],
+      both: ['css/basic.css'],
+      complete: loadApp,
+    });
+  </script>
+</body>
+</html>
